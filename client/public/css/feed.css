@@ -48,12 +48,56 @@ a {
 	bottom: 5px;
 }
 
+/* Style for the newsfeed container */
 #newsfeed {
-	max-width: 600px;
-	min-width: 600px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.feedImage {
-	max-width: 150px;
-	max-height: 150px;
+/* Each feed item card */
+.feed-item {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.feed-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Feed item title */
+.feed-item h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 12px;
+  background-color: #d62027; /* Marist red, or change as you like */
+  color: #fff;
+}
+
+.feed-item h3 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Feed item image */
+.feed-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Feed item description */
+.feed-item p {
+  padding: 12px;
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.4;
+}
+
