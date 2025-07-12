@@ -9,9 +9,14 @@ header {
 	justify-content: space-between;
 	align-items: center;
 
-	background-color: red;
+	background-color:pink;
 	font-size: 30px;
 	color: white;
+}
+body {
+	background-image:url(//wallpapers.com/images/high/pastel-pink-and-yellow-hfhvrr0anft69unq.webp);
+  background-color:white;
+  background-size: cover;
 }
 
 main {
@@ -25,9 +30,13 @@ footer {
 	left: 0px;
   bottom: 0px;
 	width: 100%;
-	background-color: red;
+	background-color:rgb(255, 173, 187);
 	text-align: center;
 	font-size: 20px;
+}
+
+#site_info {
+	color:white;
 }
 
 #portal_button {
@@ -37,7 +46,7 @@ footer {
 }
 
 a {
-	color: blue;
+	color: white;
 	text-decoration: none;
 }
 
@@ -45,7 +54,7 @@ a {
 	position: relative;
 	float: left;
 	height: 30px;
-	bottom: 5px;
+	bottom: 0px;
 }
 
 /* Style for the newsfeed container */
@@ -60,7 +69,7 @@ a {
 
 /* Each feed item card */
 .feed-item {
-  background-color: #ffffff;
+  background-color:#ff80bf;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -77,12 +86,12 @@ a {
   font-size: 1.1rem;
   margin: 0;
   padding: 12px;
-  background-color: #d62027; /* Marist red, or change as you like */
-  color: #fff;
+  background-color: #ff80bf; /* Marist red, or change as you like */
+  color: #ff80bf;
 }
 
 .feed-item h3 a {
-  color: #fff;
+  colore:white ;
   text-decoration: none;
 }
 
@@ -97,7 +106,7 @@ a {
 .feed-item p {
   padding: 12px;
   font-size: 0.95rem;
-  color: #333;
+  color:white ;
   line-height: 1.4;
 }
 
