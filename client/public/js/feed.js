@@ -6,21 +6,13 @@ window.addEventListener('load', () => {
         });
       }
 }
-)
-
-  /*function FeedItem(title, body, linkUrl, imageUrl){
-      this.title = title;
-      this.body = body;
-      this.linkUrl = linkUrl;
-      this.imageUrl = imageUrl;
-  }
-
-  const currentStories = [ 
-    new FeedItem('Future Dream Mom Car','This Mercedes Benz is the perfect it girl mom car with so many features.' ,'https://www.mbusa.com/en/vehicles/class/gls/suv', 'https://di-uploads-pod1.dealerinspire.com/mercedesbenzofakron/uploads/2023/10/Mercedes-Benz-GLS.jpg'),
-    new FeedItem('Thinking of ways to stay Active','You do not like running? Or lifting weights? Pilates is a great form of exercising. It focuses on your core but is a full body workout as well. Trust me you do not want to miss out on the rewarding feeling of being active. Not convinced? Read some benefits of pilates', 'https://www.betterhealth.vic.gov.au/pilates-health-benefits', 'https://images.squarespace-cdn.com/content/v1/619d262b80de15571c7a0a75/f96bc888-5e57-44c8-a165-e0a790fda007/DSC_9942.jpg?format=1500w' ),
-    new FeedItem('Plans to make this summer with your Friends','Each summer goes by and you never know what to do? Here is an easy solution to your boredom.', 'https://rusticpathways.com/inside-rustic/online-magazine/15-great-ideas-for-your-summer-bucket-list', 'https://herviewfromhome.com/wp-content/uploads/2018/05/shutterstock_378610153-768x512.jpg'),
-  ];
-*/
+);
+function FeedItem(title, body, linkUrl, imageUrl) {
+    this.title = title;
+    this.body = body;
+    this.linkUrl = linkUrl;
+    this.imageUrl = imageUrl;
+};
 
   function createFeedItemHTML(feedsItem, index) {
     return `
@@ -34,18 +26,23 @@ window.addEventListener('load', () => {
   }
 
   function getcurrentFeed() {
-    fetch("/api/feedItem")
-     .then(res => res.json())
-     .then(data => {
-       const newsfeedsElement = document.getElementById("newsfeed");
-    if (newsfeedsElement) {
-      newsfeedsElement.innerHTML = "";
-      data.forEach((feedsItem. index) => {
-        newsfeedsElement.innerHTML += createFeedItemHTML(feedsItem, index);
-      });
-    }
-     })
-  }
+  fetch("/api/feedItem")
+    .then(res => res.json())
+    .then(data => {
+      const newsfeedsElement = document.getElementById("newsfeed");
+
+      if (newsfeedsElement) {
+        newsfeedsElement.innerHTML = "";
+
+        data.forEach((feedItem, index) => {
+          newsfeedsElement.innerHTML += createFeedItemHTML(feedItem, index);
+        });
+      }
+    })
+    .catch(err => {
+      console.error("Error loading feed items:", err);
+    });
+}
   getcurrentFeed();
 
   window.deleteFeedItem = function (index) {
@@ -64,19 +61,46 @@ window.addEventListener('load', () => {
 
     const addButton = document.getElementById("add-button");
 
-    if (addButton) {
-      addButton.addEventListener("click", () => {
-        const title = document.getElementById("title").value.trim();
-        const body = document.getElementById("body").value.trim();
-        const linkUrl = document.getElementById("linkUrl").value.trim();
-        const imageUrl = document.getElementById("imageUrl").value.trim();
+if (addButton) {
+  addButton.addEventListener("click", () => {
+    const title = document.getElementById("title").value.trim();
+    const body = document.getElementById("body").value.trim();
+    const linkUrl = document.getElementById("linkUrl").value.trim();
+    const imageUrl = document.getElementById("imageUrl").value.trim();
 
-        const newFeedItem = { title, body, linkUrl, imageUrl};
-      } )
+     if (!title || !body || !linkUrl || !imageUrl) {
+    alert("Please fill in all fields.");
+    return;
+     }
 
-      }
-    
-    
+    const newFeedItem = { title, body, linkUrl, imageUrl };
+
+    fetch("/api/feedItem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newFeedItem)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Post added:", data);
+
+        // Clear input fields
+        document.getElementById("title").value = "";
+        document.getElementById("body").value = "";
+        document.getElementById("linkUrl").value = "";
+        document.getElementById("imageUrl").value = "";
+
+        // Refresh the feed list
+        getcurrentFeed();
+      })
+      .catch(err => {
+        console.error("Error adding feed item:", err);
+      });
+  });
+}
+
   
   /*function loadFeed() {
     const newsfeedElement = document.getElementById('newsfeed');
@@ -87,5 +111,18 @@ window.addEventListener('load', () => {
 
   loadFeed();
 });
+
+function FeedItem(title, body, linkUrl, imageUrl){
+      this.title = title;
+      this.body = body;
+      this.linkUrl = linkUrl;
+      this.imageUrl = imageUrl;
+  }
+
+  const currentStories = [ 
+    new FeedItem('Future Dream Mom Car','This Mercedes Benz is the perfect it girl mom car with so many features.' ,'https://www.mbusa.com/en/vehicles/class/gls/suv', 'https://di-uploads-pod1.dealerinspire.com/mercedesbenzofakron/uploads/2023/10/Mercedes-Benz-GLS.jpg'),
+    new FeedItem('Thinking of ways to stay Active','You do not like running? Or lifting weights? Pilates is a great form of exercising. It focuses on your core but is a full body workout as well. Trust me you do not want to miss out on the rewarding feeling of being active. Not convinced? Read some benefits of pilates', 'https://www.betterhealth.vic.gov.au/pilates-health-benefits', 'https://images.squarespace-cdn.com/content/v1/619d262b80de15571c7a0a75/f96bc888-5e57-44c8-a165-e0a790fda007/DSC_9942.jpg?format=1500w' ),
+    new FeedItem('Plans to make this summer with your Friends','Each summer goes by and you never know what to do? Here is an easy solution to your boredom.', 'https://rusticpathways.com/inside-rustic/online-magazine/15-great-ideas-for-your-summer-bucket-list', 'https://herviewfromhome.com/wp-content/uploads/2018/05/shutterstock_378610153-768x512.jpg'),
+  ];
 
 */

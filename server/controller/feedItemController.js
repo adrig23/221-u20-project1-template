@@ -1,4 +1,53 @@
-const feedItem = require('../model/feedModel');
+ const feedItem = require('../model/feedModel');
+
+let FeedItems = [
+  feedItem.newFeedItem('Future Dream Mom Car', 'This Mercedes Benz is the perfect it girl mom car...', 'https://www.mbusa.com/en/vehicles/class/gls/suv', 'https://di-uploads-pod1.dealerinspire.com/mercedesbenzofakron/uploads/2023/10/Mercedes-Benz-GLS.jpg'),
+  feedItem.newFeedItem('Thinking of ways to stay Active', 'You do not like running? Or lifting weights? Pilates...', 'https://www.betterhealth.vic.gov.au/pilates-health-benefits', 'https://images.squarespace-cdn.com/.../DSC_9942.jpg?format=1500w'),
+  feedItem.newFeedItem('Plans to make this summer with your Friends', 'Each summer goes by and you never know what to do...', 'https://rusticpathways.com/...', 'https://herviewfromhome.com/.../shutterstock_378610153-768x512.jpg')
+];
+
+exports.getAllFeedItems = (req, res) => {
+  res.json(FeedItems);
+};
+
+exports.getFeedItem = (req, res) => {
+  const id = parseInt(req.params.feedItemId);
+  if (isNaN(id) || id < 0 || id >= FeedItems.length) {
+    return res.status(404).json({ error: "Feed item not found" });
+  }
+  res.json(FeedItems[id]);
+};
+
+exports.saveFeedItemHandler = (req, res) => {
+  const { title, body, linkUrl, imageUrl } = req.body;
+  const newItem = feedItem.newFeedItem(title, body, linkUrl, imageUrl);
+  FeedItems.push(newItem);
+  res.status(201).json(newItem);
+};
+
+exports.deleteFeedItem = (req, res) => {
+  const id = parseInt(req.params.feedItemId);
+  if (isNaN(id) || id < 0 || id >= FeedItems.length) {
+    return res.status(404).json({ error: "Feed item not found" });
+  }
+  const deleted = FeedItems.splice(id, 1)[0];
+  res.json({ message: "Feed item deleted", deleted });
+};
+
+exports.updateFeedItem = (req, res) => {
+  const id = parseInt(req.params.feedItemId);
+  if (isNaN(id) || id < 0 || id >= FeedItems.length) {
+    return res.status(404).json({ error: "Feed item not found" });
+  }
+  const item = FeedItems[id];
+  if (req.body.title) item.title = req.body.title;
+  if (req.body.body) item.body = req.body.body;
+  if (req.body.linkUrl) item.linkUrl = req.body.linkUrl;
+  if (req.body.imageUrl) item.imageUrl = req.body.imageUrl;
+  res.json(item);
+};
+
+ /*const feedItem = require('../model/feedModel');
 
 
 let feedItem1 = feedItem.newFeedItem(
@@ -88,4 +137,5 @@ exports.updateFeedItem = (req, res) => {
       res.send(JSON.stringify(item))
       
 };
+*/
 

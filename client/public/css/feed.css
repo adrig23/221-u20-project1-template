@@ -57,6 +57,11 @@ a {
 	bottom: 0px;
 }
 
+#add-feed{
+
+
+}
+
 /* Style for the newsfeed container */
 #newsfeed {
   display: grid;
