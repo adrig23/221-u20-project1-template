@@ -1,12 +1,121 @@
-window.addEventListener('load', () => {
+ window.addEventListener('load', () => {
   const portal = document.getElementById('portal_button');
   if (portal) {
     portal.addEventListener('click', () => {
       window.location.href = 'https://www.pinterest.com/';
+    });
+  }
+
+  getcurrentFeed(); // <-- move this inside load
+});
+
+function FeedItem(title, body, linkUrl, imageUrl) {
+  this.title = title;
+  this.body = body;
+  this.linkUrl = linkUrl;
+  this.imageUrl = imageUrl;
+};
+
+function createFeedItemHTML(feedsItem, index) {
+  return `
+    <div class="feed-item">
+      <h3><a href="${feedsItem.linkUrl}" target="_blank">${feedsItem.title}</a></h3>
+      <img src="${feedsItem.imageUrl}" alt="${feedsItem.title}">
+      <p>${feedsItem.body}</p>
+      <button class="delete-button" onclick="deleteFeedItem(${index})">Delete</button>
+    </div>
+  `;
+}
+
+function getcurrentFeed() {
+  fetch("/api/feedItem")
+    .then(res => res.json())
+    .then(data => {
+      const newsfeedsElement = document.getElementById("newsfeed");
+      if (newsfeedsElement) {
+        newsfeedsElement.innerHTML = "";
+        data.forEach((feedItem, index) => {
+          newsfeedsElement.innerHTML += createFeedItemHTML(feedItem, index);
         });
       }
+    })
+    .catch(err => {
+      console.error("Error loading feed items:", err);
+    });
 }
-);
+
+window.deleteFeedItem = function (index) {
+  fetch("/api/feedItem/" + index, {
+    method: 'DELETE',
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message);
+      getcurrentFeed();
+    })
+    .catch(error => {
+      console.error('Error deleting feed item', error);
+    });
+};
+
+const addButton = document.getElementById("add-button");
+
+if (addButton) {
+  addButton.addEventListener("click", () => {
+    const title = document.getElementById("title").value.trim();
+    const body = document.getElementById("body").value.trim();
+    const linkUrl = document.getElementById("linkUrl").value.trim();
+    const imageUrl = document.getElementById("imageUrl").value.trim();
+
+    if (!title || !body || !linkUrl || !imageUrl) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    const newFeedItem = { title, body, linkUrl, imageUrl };
+
+    fetch("/api/feedItem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newFeedItem)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Post added:", data);
+        document.getElementById("title").value = "";
+        document.getElementById("body").value = "";
+        document.getElementById("linkUrl").value = "";
+        document.getElementById("imageUrl").value = "";
+        getcurrentFeed();
+      })
+      .catch(err => {
+        console.error("Error adding feed item:", err);
+      });
+  });
+}
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /*window.addEventListener('load', () => {
+  const portal = document.getElementById('portal_button');
+  if (portal) {
+    portal.addEventListener('click', () => {
+      window.location.href = 'https://www.pinterest.com/';
+    });
+  }
+
+  getcurrentFeed(); 
+});
+
+
+
 function FeedItem(title, body, linkUrl, imageUrl) {
     this.title = title;
     this.body = body;
@@ -101,7 +210,7 @@ if (addButton) {
   });
 }
 
-  
+*/
   /*function loadFeed() {
     const newsfeedElement = document.getElementById('newsfeed');
     if (newsfeedElement) {

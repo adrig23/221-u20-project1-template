@@ -17,14 +17,19 @@ app.get('/feed', (req, res) => {
 
 const feedItemController = require('./controller/feedItemController');
 
-app.route('/api/feed')
+
+app.route('/api/feedItem')
   .get(feedItemController.getAllFeedItems)
   .post(feedItemController.saveFeedItemHandler);
 
-app.route('/api/feed/:feedItemId')
+app.route('/api/feedItem/:feedItemId')
   .get(feedItemController.getFeedItem)
   .delete(feedItemController.deleteFeedItem)
   .patch(feedItemController.updateFeedItem);
+
+app.listen(1337, () => console.log('Listening on port 1337.'));
+
+
 /*
 app.route('/api/feedItem')
   .get(feedItemController.getAllFeedItems)
@@ -35,5 +40,3 @@ app.route('/api/feedItem/:feedItemId')
   .delete(feedItemController.deleteFeedItem)
   .patch(feedItemController.updateFeedItem);
 */
-
-app.listen(1337, () => console.log('Listening on port 1337.'));

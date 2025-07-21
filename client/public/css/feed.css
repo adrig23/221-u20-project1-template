@@ -17,6 +17,7 @@ body {
 	background-image:url(//wallpapers.com/images/high/pastel-pink-and-yellow-hfhvrr0anft69unq.webp);
   background-color:white;
   background-size: cover;
+  scroll-behavior: smooth;
 }
 
 main {
@@ -57,12 +58,7 @@ a {
 	bottom: 0px;
 }
 
-#add-feed{
 
-
-}
-
-/* Style for the newsfeed container */
 #newsfeed {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -70,6 +66,8 @@ a {
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
+  flex: 2;
+  
 }
 
 /* Each feed item card */
@@ -96,7 +94,7 @@ a {
 }
 
 .feed-item h3 a {
-  colore:white ;
+  color:white ;
   text-decoration: none;
 }
 
@@ -115,3 +113,83 @@ a {
   line-height: 1.4;
 }
 
+/* Container for the add post form */
+#add-form {
+  margin:  0 auto;
+  padding: 20px;
+  background-color: #ffe6f0;  
+  border: 1px solid #f8c8d8; 
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(255, 182, 193, 0.3); 
+  flex: 1;
+  max-width: 350px;
+}
+
+
+#add-form input {
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  margin: 8px 0;
+  font-size: 1rem;
+  border: 1px solid #f8c8d8; 
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+#add-form input:focus {
+  border-color: #ff66a3; 
+  outline: none;
+  background-color: #fff0f6; 
+}
+
+
+#add-button {
+  display: block;
+  background-color:  white ; 
+  color: #ff59ac ;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#add-button:hover {
+  background-color:  #ff80bf; 
+}
+
+.add-button:active {
+  background-color: #ff80bf ;
+  box-shadow: 0 5px white;
+  transform: translateY(4px);
+}
+
+
+
+#content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 20px;
+  flex-wrap: wrap; 
+}
+
+#tilte{
+    color:#ff66a3;
+}
+
+#bodyy{
+	color:#ff66a3;
+}
+      
+#linkUrl{ 
+	color:#ff66a3;
+}
+
+#imageUrl{
+     color:#ff66a3;  
+}
+      

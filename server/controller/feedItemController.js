@@ -1,9 +1,11 @@
  const feedItem = require('../model/feedModel');
 
 let FeedItems = [
-  feedItem.newFeedItem('Future Dream Mom Car', 'This Mercedes Benz is the perfect it girl mom car...', 'https://www.mbusa.com/en/vehicles/class/gls/suv', 'https://di-uploads-pod1.dealerinspire.com/mercedesbenzofakron/uploads/2023/10/Mercedes-Benz-GLS.jpg'),
-  feedItem.newFeedItem('Thinking of ways to stay Active', 'You do not like running? Or lifting weights? Pilates...', 'https://www.betterhealth.vic.gov.au/pilates-health-benefits', 'https://images.squarespace-cdn.com/.../DSC_9942.jpg?format=1500w'),
-  feedItem.newFeedItem('Plans to make this summer with your Friends', 'Each summer goes by and you never know what to do...', 'https://rusticpathways.com/...', 'https://herviewfromhome.com/.../shutterstock_378610153-768x512.jpg')
+  feedItem.newFeedItem('Future Dream Mom Car','This Mercedes Benz is the perfect it girl mom car with so many features.' ,'https://www.mbusa.com/en/vehicles/class/gls/suv', 'https://di-uploads-pod1.dealerinspire.com/mercedesbenzofakron/uploads/2023/10/Mercedes-Benz-GLS.jpg'),
+  
+  feedItem.newFeedItem('Thinking of ways to stay Active','You do not like running? Or lifting weights? Pilates is a great form of exercising. It focuses on your core but is a full body workout as well. Trust me you do not want to miss out on the rewarding feeling of being active. Not convinced? Read some benefits of pilates', 'https://www.betterhealth.vic.gov.au/pilates-health-benefits', 'https://images.squarespace-cdn.com/content/v1/619d262b80de15571c7a0a75/f96bc888-5e57-44c8-a165-e0a790fda007/DSC_9942.jpg?format=1500w' ),
+  
+  feedItem.newFeedItem('Plans to make this summer with your Friends','Each summer goes by and you never know what to do? Here is an easy solution to your boredom.', 'https://rusticpathways.com/inside-rustic/online-magazine/15-great-ideas-for-your-summer-bucket-list', 'https://herviewfromhome.com/wp-content/uploads/2018/05/shutterstock_378610153-768x512.jpg'),
 ];
 
 exports.getAllFeedItems = (req, res) => {
